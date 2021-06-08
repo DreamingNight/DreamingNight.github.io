@@ -66,7 +66,9 @@
         })();
     </script>
 
-<meta name="generator" content="Hexo 5.4.0"><link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css">
+<meta name="generator" content="Hexo 5.4.0">
+<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
+<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css">
 <link rel="stylesheet" href="/css/prism-line-numbers.css" type="text/css"></head>
 
 <body>
@@ -366,7 +368,7 @@
 </div>
 <script>
     // 每天切换 banner 图.  Switch banner image every day.
-    $('.bg-cover').css('background-image', 'url(/medias/banner/' + new Date().getDay() + '.png)');
+    $('.bg-cover').css('background-image', 'url(/medias/banner/' + new Date().getHours() + '.png)');
 </script>
 
             <div class="cover-btns">
@@ -493,7 +495,7 @@ $(function () {
                         <div class="card-image">
                             
                             
-                            <img src="/medias/featureimages/14.jpg" class="responsive-img" alt="Hello World">
+                            <img src="/medias/featureimages/13.jpg" class="responsive-img" alt="Hello World">
                             
                             <span class="card-title">Hello World</span>
                         </div>
@@ -525,7 +527,7 @@ $(function () {
                         <div class="card-image">
                             
                             
-                            <img src="/medias/featureimages/4.jpg" class="responsive-img" alt="articletest">
+                            <img src="/medias/featureimages/5.jpg" class="responsive-img" alt="articletest">
                             
                             <span class="card-title">articletest</span>
                         </div>
@@ -534,13 +536,10 @@ $(function () {
                     <div class="card-content article-content">
                         <div class="summary block-with-text">
                             
-                            func main() {
-//定义，c++: int nums[6] = {1,2,3,4}
-   //定义一个int数组
-var con [6]int
-//定义并赋初值
-nums := [6]int{1, 2, 3, 4}
-   fmt
+                            用了半天多的时间终于搭好了这个博客  。目前采用的是github pages + hexo 的方式搭建，对matery主题进行改造，利用gitalk实现评论区和留言板的功能。
+测试下markdown支持以及插件语法高亮：
+😊 😃 🌘
+
                             
                         </div>
                         <div class="publish-info">
@@ -556,8 +555,8 @@ nums := [6]int{1, 2, 3, 4}
                     
                     <div class="card-action article-tags">
                         
-                        <a href="/tags/Golang/" target="_blank">
-                            <span class="chip bg-color">Golang</span>
+                        <a href="/tags/Blog/" target="_blank">
+                            <span class="chip bg-color">Blog</span>
                         </a>
                         
                     </div>
@@ -579,7 +578,7 @@ nums := [6]int{1, 2, 3, 4}
             
                 &nbsp;<i class="fa fa-area-chart"></i>&nbsp;站点总字数:&nbsp;
                 <span class="white-color">
-                    153
+                    227
                 </span>
                 
 
@@ -642,8 +641,8 @@ nums := [6]int{1, 2, 3, 4}
     $(document).ready(function () {
 
         var int = setInterval(fixCount, 50);
-        var pvcountOffset = 80000;
-        var uvcountOffset = 20000;
+        var pvcountOffset = 100;
+        var uvcountOffset = 20;
 
         function fixCount() {
             if (document.getElementById("busuanzi_container_site_pv").style.display != "none") {
@@ -681,7 +680,7 @@ nums := [6]int{1, 2, 3, 4}
         minutes - 0-59之间的整数，做为date对象的分钟数
         seconds - 0-59之间的整数，做为date对象的秒数
         microseconds - 0-999之间的整数，做为date对象的毫秒数 */
-        var t1 = Date.UTC(2021, 06, 08, 00, 00, 00); //创建网站的北京时间
+        var t1 = Date.UTC(2021, 06, 08, 00, 00, 00); //创建网站的北京时间，记住这个日子2021-06-08
         var t2 = Date.UTC(todayYear, todayMonth, todayDate, todayHour, todayMinute, todaySecond);
         var diff = t2 - t1;
         var diffYears = Math.floor(diff / years);
