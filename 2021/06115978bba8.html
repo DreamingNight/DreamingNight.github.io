@@ -490,12 +490,14 @@
 <p>作为一名在校生，我深切地感受到国内高校很多课程的教学非常偏重理论，而对实践方面的内容涉及得很少。我觉得理论基础固然重要，但对于工程师而言理论最终是帮助我们更好地解决问题的。而学校和课程和很多网上的教程文章对实践过程的讲解并不完整清晰。我之前也简单学习过爬虫，当时也是为了解决自己的一个实际需求，网络上关于爬虫的教程很多，有从原理知识方面介绍的，也有实践方面的介绍。但这些呢，并没有很快很好地解决我当时的问题，因为原理知识的介绍涉及的内容很多，看完需要很多时间，而实践方面的内容呢以代码展示为主，对于当时完全是小白的我来说，缺少了一些关键步骤的指引，所以有了今天的这个系列。</p>
 <p>这个系列更多是从一个技术领域新手的角度出发，着手于快速解决一个比较简单的需求。由于我选择的领域也都是我并不十分熟悉的，所以自然在很大程度上避免了the curse of knowledge。不过它也有相应的缺点：这并不是爬虫方向的系统教程，有很多内容并没有涉及，还有其中一些操作步骤可能是针对特定的网页数据有效，不具备普适性。但该教程展示了利用爬虫解决一个简单需求的完整过程，对于想要快速利用简单爬虫完成自己需求的朋友将有所帮助，在了解了相应的流程后，就可以着手自己的任务，如果自己实践的过程中遇到了问题可以再去查阅网络上关于爬虫知识都系统性教程，这时候将更有针对性地从中选取自己需要的信息解决自己的问题。</p>
 <h2 id="初步分析"><a href="#初步分析" class="headerlink" title="初步分析"></a>初步分析</h2><p>正好前几天的时候，我一个小伙伴让我帮忙在淘宝商品页面上爬一个数据。他给我发过来一个URL和图片，说想用爬虫获取人气信息，如下图所示。</p>
-<img src="一次简单的爬虫过程/image-20210610132323793-1623427022601.png" alt="image-20210610132323793" style="zoom:50%;">
+<img src="一次简单的爬虫过程/image-20210610132323793-1623427022601.png" alt="image1" style="zoom:50%;">
 
 <p>虽然很久没搞爬虫了，但看起来很简单于是我快速答应了下来。首先，用Chrome打开该连接然后利用控制台(F12)功能在Element里寻找该组件对应的html代码，如下图所示：</p>
-<p><img src="%E4%B8%80%E6%AC%A1%E7%AE%80%E5%8D%95%E7%9A%84%E7%88%AC%E8%99%AB%E8%BF%87%E7%A8%8B/image-20210610133641607.png" alt="image-20210610133641607"></p>
+<img src="/2021/06115978bba8/image-20210610133641607.png" class="" title="image2">
+
 <p>可以看到，当鼠标悬停在不同的代码片段上时，对应的元素在网页中会高亮显示出来。这样可以一点一点找到我们想要的元素对应的html代码。最终，我锁定了人气部分对应的代码，如下：</p>
-<p><img src="%E4%B8%80%E6%AC%A1%E7%AE%80%E5%8D%95%E7%9A%84%E7%88%AC%E8%99%AB%E8%BF%87%E7%A8%8B/image-20210612000350345.png" alt="image-20210612000350345"></p>
+<img src="/2021/06115978bba8/image-20210612000350345.png" class="" title="image3">
+
 <p>这时，我以为差不多搞定了，利用request库请求到html后再解析就可以拿到对应人气值了，我又查看了网页源代码，发现了<code>&lt;meta charset="gbk" /&gt;</code>，然后快速地写下了代码：</p>
 <pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">import</span> requests
 <span class="token keyword">from</span> bs4 <span class="token keyword">import</span> BeautifulSoup
@@ -509,9 +511,11 @@ target <span class="token operator">=</span> soup<span class="token punctuation"
 <span class="token keyword">print</span><span class="token punctuation">(</span>target<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <h2 id="事情没有那么简单，，"><a href="#事情没有那么简单，，" class="headerlink" title="事情没有那么简单，，"></a>事情没有那么简单，，</h2><p>但我发现输出是<code>&lt;span id="J_CollectCount"&gt;&lt;/span&gt;</code>，里面并没有人气值的数据。开始我以为是我没检索完全，可能还有一个<code>span id ="J_CollectCount"</code>，于是在网页源代码中搜索结果只有这一个，虽然我没有学过html方面的东西，但我意识到这个值应该是动态再获取的，而不是服务器返回html时直接把值放在里面。所以关键是找到用什么方法请求了这个数值， 在html里我没找到什么头绪，然后我突然想到既然是动态请求肯定也要利用网络，那依然可以在控制台里面找线索。这次是利用network菜单栏。</p>
-<p><img src="%E4%B8%80%E6%AC%A1%E7%AE%80%E5%8D%95%E7%9A%84%E7%88%AC%E8%99%AB%E8%BF%87%E7%A8%8B/image-20210612002838065.png" alt="image-20210612002838065"></p>
+<img src="/2021/06115978bba8/image-20210612002838065.png" class="" title="image4">
+
 <p>可以看到控制台发现了上百个http请求，我用搜索功能最终确定了获取人气信息的请求</p>
-<p><img src="%E4%B8%80%E6%AC%A1%E7%AE%80%E5%8D%95%E7%9A%84%E7%88%AC%E8%99%AB%E8%BF%87%E7%A8%8B/image-20210612003107933.png" alt="image-20210612003107933"></p>
+<img src="/2021/06115978bba8/image-20210612003107933.png" class="" title="image5">
+
 <p>找到对应的URL，粘贴到浏览器中访问，果然返回了json数据包含了人气数据。其实这里也可以看到，我上面这些图片的截取时间不同，人气数据确实一直在动态变化。这个URL长这样：<code>https://count.taobao.com/counter3?_ksTS=1623429031125_307&amp;callback=jsonp308&amp;keys=SM_368_dsr-2194426048,ICCP_1_526256013584</code></p>
 <p>在网页源码里寻找相应的输入参数，最终我发现：<code>"apiBeans":"//count.taobao.com/counter3?keys=SM_368_dsr-2194426048,ICCP_1_526256013584"</code>，也就是提供了keys和ICCP的数值，从而生成URL请求。我试过直接访问html里这个URL是不行的，可见<code>_ksTS=1623429031125_307&amp;callback=jsonp308</code>是必不可少的，但我依然不知道这里面尤其是_ksTS对于的数据是个啥，会不会变化，于是我又换了个商品用同样的方法找到请求人气数据的URL，发现他们是不同的，而且我并没有在html里发现这个参数的存在。这就很难受了，因为没法爬取一系列不同的商品了。</p>
 <p>好在经过我的不懈努力（各种尝试），我发现在URL中去掉那个奇妙的参数_ksTS也可以得到正确的返回结果，我大喜，最终：</p>
