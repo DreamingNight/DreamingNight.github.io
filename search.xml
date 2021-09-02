@@ -4,6 +4,33 @@
   
     
     <entry>
+      <title>微服务环境搭建</title>
+      <link href="/2021/0902fa782106.html"/>
+      <url>/2021/0902fa782106.html</url>
+      
+        <content type="html"><![CDATA[<p>Windows平台下的gRPC环境搭建</p><img src="/2021/0902fa782106/image-20210902170326402.png" class="" title="image1">]]></content>
+      
+      
+      <categories>
+          
+          <category> 环境配置 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Go </tag>
+            
+            <tag> 微服务 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>一次简单的爬虫过程</title>
       <link href="/2021/06115978bba8.html"/>
       <url>/2021/06115978bba8.html</url>
